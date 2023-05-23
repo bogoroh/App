@@ -88,7 +88,7 @@ export default [
         shouldShow: (type, reportAction) => {
             const message = _.last(lodashGet(reportAction, 'message', [{}]));
             const isAttachment = _.has(reportAction, 'isAttachment') ? reportAction.isAttachment : ReportUtils.isReportMessageAttachment(message);
-            return isAttachment && reportAction.reportActionID;
+            return isAttachment && reportAction.reportActionID && !reportAction.originalMessage.isDeletedParentAction;
         },
         onPress: (closePopover, {reportAction}) => {
             const message = _.last(lodashGet(reportAction, 'message', [{}]));
